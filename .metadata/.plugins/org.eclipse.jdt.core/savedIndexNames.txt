@@ -1,0 +1,14 @@
+INDEX VERSION 1.127+D:\Dropbox\School\CS 151\Group Project\Mancala\.metadata\.plugins\org.eclipse.jdt.core
+847618560.index
+248351807.index
+844601494.index
+2394392208.index
+3776425001.index
+3520661010.index
+881303192.index
+3176364129.index
+2448026493.index
+2958705335.index
+2143716467.index
+881895235.index
+290714306.index
