@@ -11,7 +11,7 @@ public class MancalaGame {
 	final int PLAYER_A_PIT = 6;
 	final int PLAYER_B_PIT = 13;
 
-	final String pitNumbers[] = { "A1", "A2", "A3", "A4", "A5", "A6",
+	final static String pitNumbers[] = { "A1", "A2", "A3", "A4", "A5", "A6",
 			"playerA", "B1", "B2", "B3", "B4", "B5", "B6", "playerB" };
 
 	private ArrayList<Integer> board;
@@ -36,6 +36,29 @@ public class MancalaGame {
 		// this.resetBoard();
 	}
 
+	/**
+	 * 
+	 * @return board
+	 */
+	public ArrayList<Integer> getBoard(){
+		return board;
+	}
+	
+	/**
+	 * 
+	 */
+	public ArrayList<Integer> getPrevious(){
+		return previous;
+	}
+	
+	/**
+	 * @return stonesLeft
+	 */
+	public int getStonesLeft(){
+		return stonesLeft;
+	}
+	
+	
 	/**
 	 * This clears the board and places stones into each pit.
 	 * */
@@ -66,7 +89,7 @@ public class MancalaGame {
 	/**
 	 * 
 	 * */
-	public void step(String pitNumber) {
+	public void step(int pitNumber) {
 
 		int index;
 		boolean test = false;
@@ -75,7 +98,8 @@ public class MancalaGame {
 		// Make a copy of the board
 		previous = new ArrayList<Integer>(board);
 
-		index = convertToInt(pitNumber);
+		index = pitNumber;
+		//index = convertToInt(pitNumber);
 		// Amount of stones in the pit selected
 		steps = board.get(index);
 
@@ -244,7 +268,8 @@ public class MancalaGame {
 				text = scan.nextLine();
 			}
 
-			step(text);
+			//do it this way instead of step(text). this works better for Peter's MancalaModel 
+			step(this.convertToInt(text));
 
 			if (gameOverCheck() == true) {
 				determineWinner();

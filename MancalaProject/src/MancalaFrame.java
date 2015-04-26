@@ -7,12 +7,14 @@ import javax.swing.event.ChangeEvent;
 /**
  * 
  */
-public class MancalaFrame {
+public class MancalaFrame{
 
+	StyleManager style;
     /**
      * 
      */
     public MancalaFrame() {
+    	model = new MancalaModel(3);
     }
 
     /**
@@ -25,28 +27,6 @@ public class MancalaFrame {
      */
     public MancalaModel model;
 
-    /**
-     * 
-     */
-    public int[] pitValues;
-
-    /**
-     * 
-     */
-    public PitComponent[] pits;
-
-
-
-
-
-
-
-    /**
-     * @param ChangeEvent e
-     */
-    public void stateChanged(ChangeEvent e) {
-        // TODO implement here
-    }
 
     /**
      * @param StyleManager style

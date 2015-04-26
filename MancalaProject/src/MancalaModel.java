@@ -7,52 +7,35 @@ import javax.swing.event.ChangeListener;
  * 
  */
 public class MancalaModel {
+	
 
-    /**
-     * 
-     */
-    public MancalaModel() {
-    }
-
-    /**
-     * 
-     */
-    public ArrayList<ChangeListener> list;
-
-    /**
-     * 
-     */
-    public int NUMBER_PITS;
-
-    /**
-     * 
-     */
-    public int[] pitList;
-
-
-
-
+	MancalaGame mancalaData;   
+	ArrayList<ChangeListener> listeners;
+	
+	MancalaModel(int defaultPitStones){
+		mancalaData = new MancalaGame(defaultPitStones);
+		listeners = new ArrayList<ChangeListener>();
+	}
 
     /**
      * @param ChangeListener c
      */
     public void addChangeListener(ChangeListener c) {
-        // TODO implement here
+        listeners.add(c);
     }
 
     /**
      * @param int pit
      */
     public void updateGameState(int pit) {
-        // TODO implement here
+    	mancalaData.step(pit);
     }
 
     /**
      * @return
      */
-    public int[] getGameState() {
-        // TODO implement here
-        return null;
+    public ArrayList<Integer> getGameState() {
+    	return mancalaData.getBoard();  
     }
 
 }
