@@ -10,6 +10,7 @@ public class RedStyle implements StyleManager {
      * 
      */
     public RedStyle() {
+    	
     }
 
 

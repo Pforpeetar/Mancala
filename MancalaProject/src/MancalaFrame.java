@@ -9,13 +9,24 @@ import javax.swing.event.ChangeEvent;
  */
 public class MancalaFrame{
 
-	StyleManager style;
+	
+	
     /**
      * 
      */
-    public MancalaFrame() {
-    	model = new MancalaModel(3);
+    public MancalaFrame(int defaultStones, String style) {
+    	model = new MancalaModel(defaultStones);
+    	if(style.equals("red"))
+    		changeStyle(new RedStyle());
+    	else if(style.equals("blue"))
+    		changeStyle(new BlueStyle());	
+    	
     }
+    
+    /**
+     * 
+     */
+    public StyleManager style;
 
     /**
      * 
@@ -32,7 +43,7 @@ public class MancalaFrame{
      * @param StyleManager style
      */
     public void changeStyle(StyleManager style) {
-        // TODO implement here
+        this.style = style;
     }
 
 }

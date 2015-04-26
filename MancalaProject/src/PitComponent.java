@@ -11,6 +11,7 @@ public class PitComponent {
      * 
      */
     public PitComponent() {
+    	
     }
 
 
