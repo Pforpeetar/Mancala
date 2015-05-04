@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.util.*;
 
 /**
@@ -16,8 +17,9 @@ public class BlueStyle implements StyleManager {
     /**
      * 
      */
-    public void setStyle() {
+    public Color setStyle() {
         // TODO implement here
+    	return Color.BLUE;
     }
 
 }
