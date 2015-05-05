@@ -20,17 +20,18 @@ public class PitComponent implements Icon, ChangeListener {
 	private StyleManager style;
 	private int stones;
 	private MancalaModel model;
-
+	private int index;
 	/**
      * 
      */
 	public PitComponent(int width, int height, StyleManager style, int stones,
-			MancalaModel model) {
+			MancalaModel model, int index) {
 		this.width = width;
 		this.height = height;
 		this.style = style;
 		this.stones = stones;
 		this.model = model;
+		this.index = index;
 	}
 
 	/**
@@ -57,15 +58,15 @@ public class PitComponent implements Icon, ChangeListener {
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
 		Graphics2D g2 = (Graphics2D) g;
-		Rectangle2D.Double pit = new Rectangle2D.Double(x, y, height, height);
+		Rectangle2D.Double pit = new Rectangle2D.Double(x, y, width, height);
 		g2.setColor(style.setStyle());
 		g2.fill(pit);
-		int stoneSize = height / 6;
+		int stoneSize = 20;
 		for (int i = 0; i < stones; i++) {
 			// TO DO SAMSON: Make a sin curve.
 			Ellipse2D.Double stone = new Ellipse2D.Double();
 			stone = new Ellipse2D.Double(x + Math.random()
-					* (height - stoneSize), y + Math.random()
+					* (width - stoneSize), y + Math.random()
 					* (height - stoneSize), stoneSize, stoneSize);
 			g2.setColor(arrayOfColors[(int) (Math.random() * arrayOfColors.length)]);
 			g2.fill(stone);
@@ -77,7 +78,7 @@ public class PitComponent implements Icon, ChangeListener {
 
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
-
+		stones = model.getStones(index);
 	}
 
 }

@@ -4,32 +4,52 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class PitLabel extends JPanel implements ChangeListener {
-	public int index;
-	public int stoneAmount;
-	public String playerSide;
-	public boolean isPlayer;
+	private int pitIndex;
+	private int stoneAmount;
+	private MancalaModel model;
+	private JLabel stoneLabel;
+	private JLabel countLabel;
+	private JLabel indexLabel;
+	private PitComponent pit;
 
-	public PitLabel(PitComponent pit, int i, int s, String pSide, boolean ip) {
+	
+	public PitLabel(PitComponent pit, int i, MancalaModel model) {
 		// TODO Auto-generated constructor stub
-		isPlayer = ip;
-		JLabel label = new JLabel(pit);
-		stoneAmount = s;
-		index = i;
-		playerSide = pSide;
-		add(label);
-		add(new JLabel("" + stoneAmount));
-		if (!isPlayer) {
-			if (playerSide == "B") {
-			add(new JLabel(playerSide + (index+1)));
+		this.model = model;
+		this.pit = pit;
+		this.stoneLabel = new JLabel(pit);
+		stoneAmount = model.getStones(pitIndex);
+		//stoneAmount = 4;
+		pitIndex = i;
+		countLabel = new JLabel("" + stoneAmount);
+
+		if (pitIndex != 6 || pitIndex != 13) {
+			if (pitIndex < 6) {
+			indexLabel = new JLabel("B" + (pitIndex+1) + ":");
+			add(indexLabel);
 			} else {
-			add(new JLabel(playerSide + (index+-6)));
+			indexLabel = new JLabel("A" + (pitIndex-6) + ":");
+			add(indexLabel);
 			}
 		}
+		add(countLabel);
+		add(stoneLabel);
 	}
 
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
-
+		stoneAmount = model.getStones(pitIndex);
+		countLabel.setText("" + stoneAmount);
+		countLabel.repaint();
+		repaint();
+	}
+	
+	public int getPitIndex() {
+		return pitIndex;
+	}
+	
+	public int getStone() {
+		return stoneAmount;
 	}
 
 }

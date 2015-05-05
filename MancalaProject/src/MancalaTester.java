@@ -20,13 +20,13 @@ import javax.swing.JTextField;
 public class MancalaTester {
 	static JFrame startFrame;
 	static GridBagConstraints c;
-	
+	static MancalaModel model;
 	public static void main(String[] arg0){
 		startFrame = new JFrame();
     	startFrame.setSize(new Dimension(250,250));
     	c = new GridBagConstraints();
     	startFrame.setLayout(new GridBagLayout());
-    	
+
 		selectDefaultStones();
 	}
 	
@@ -39,6 +39,7 @@ public class MancalaTester {
 				// TODO Auto-generated method stub
 				int stoneAmount = Integer.parseInt(stoneField.getText());
 				selectStyle(stoneAmount);
+				model = new MancalaModel(stoneAmount);
 				startFrame.remove(stoneFieldPrompt);
 				startFrame.remove(stoneField);
 				startFrame.remove(setStones);
@@ -69,7 +70,8 @@ public class MancalaTester {
 
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				MancalaFrame mainFrame = new MancalaFrame(defaultStones, "red");
+				MancalaFrame mainFrame = new MancalaFrame(defaultStones, new RedStyle(), model);
+				model.addChangeListener(mainFrame);
 				//mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				//mainFrame.setVisible(true);		
 				c.gridx = 0;
@@ -89,7 +91,8 @@ public class MancalaTester {
 
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				MancalaFrame mainFrame = new MancalaFrame(defaultStones, "blue");
+				MancalaFrame mainFrame = new MancalaFrame(defaultStones, new BlueStyle(), model);
+				model.addChangeListener(mainFrame);
 				//mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				//mainFrame.setVisible(true);
 				c.gridx = 0;
@@ -123,11 +126,6 @@ public class MancalaTester {
     	startFrame.pack();
 		startFrame.setVisible(true);
     }
-    
-    public static void addMancalaFrame() {
-    	
-    }
-
     /**
      * 
      */

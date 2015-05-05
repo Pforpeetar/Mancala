@@ -37,6 +37,11 @@ public class MancalaModel {
 	public ArrayList<Integer> getGameState() {
 		return mancalaData.getBoard();
 	}
+	
+	public int getStones(int pit) {
+		//System.out.println("Get Stone in Pit " + pit + " is " + mancalaData.getStonesInPit(pit));
+		return mancalaData.getStonesInPit(pit);
+	}
 
 	public void update() {
 		for (ChangeListener l : listeners) {

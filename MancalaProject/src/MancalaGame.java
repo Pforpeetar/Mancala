@@ -25,7 +25,8 @@ public class MancalaGame {
 	public MancalaGame(int stonesPerPit) {
 		this.board = new ArrayList<Integer>();
 		this.previous = new ArrayList<Integer>();
-		// this.stonesPerPit = stonesPerPit;
+		this.stonesPerPit = stonesPerPit;
+		playGUIVersion();
 		// stonesLeft = stonesPerPit * NUMBER_OF_PITS;
 		// Player A goes first
 		// playerBTurn = false;
@@ -57,6 +58,8 @@ public class MancalaGame {
 	 * 
 	 * */
 	public int getStonesInPit(int index){
+		//System.out.println(index);
+		//System.out.println(board.get(index));
 		return board.get(index);
 	}
 	
@@ -163,7 +166,7 @@ public class MancalaGame {
 
 			index++;
 			steps--;
-
+			//printBoard();
 		}
 
 		// Extra turn if last stone lands on own mancala
@@ -246,6 +249,7 @@ public class MancalaGame {
 		return -1;
 	}
 
+	
 	/**
 	 * Console version of the game.
 	 * */
@@ -291,6 +295,15 @@ public class MancalaGame {
 
 	}
 
+	private void playGUIVersion() {
+		stonesLeft = stonesPerPit * NUMBER_OF_PITS;
+		// Player A goes first
+		playerBTurn = false;
+		this.resetBoard();
+		//determineWinner();
+
+	}
+	
 	/**
 	 * Prints the mancala board onto the console.
 	 * */
