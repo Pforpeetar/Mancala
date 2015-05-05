@@ -248,6 +248,10 @@ public class MancalaGame {
 		}
 		return -1;
 	}
+	
+	public boolean getTurn() {
+		return playerBTurn;
+	}
 
 	
 	/**

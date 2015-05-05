@@ -42,6 +42,10 @@ public class MancalaModel {
 		//System.out.println("Get Stone in Pit " + pit + " is " + mancalaData.getStonesInPit(pit));
 		return mancalaData.getStonesInPit(pit);
 	}
+	
+	public boolean getTurn() {
+		return mancalaData.getTurn();
+	}
 
 	public void update() {
 		for (ChangeListener l : listeners) {

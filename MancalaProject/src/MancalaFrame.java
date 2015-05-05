@@ -2,6 +2,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -34,8 +36,10 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 				public void mousePressed(MouseEvent event) {
 					//System.out.println("Pit Label: " + pitLabel.getPitIndex() + " Stones: " + pitLabel.getStone());
 					//System.out.println("Model Pit: " + model.getStones(pitLabel.getPitIndex()) + " Stones: " + model.getStones(pitLabel.getPitIndex()));					
-					model.updateGameState(pitLabel.getPitIndex());
-					model.update();				
+					if (model.getTurn()) {
+						model.updateGameState(pitLabel.getPitIndex());
+						model.update();			
+					}
 				}
 			});
 			pits.add(pitLabel);
@@ -51,8 +55,10 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 				public void mousePressed(MouseEvent event) {
 					//System.out.println("Pit Label: " + pitLabel.getPitIndex() + " Stones: " + pitLabel.getStone());
 					//System.out.println("Model Pit: " + model.getStones(pitLabel.getPitIndex()) + " Stones: " + model.getStones(pitLabel.getPitIndex()));					
-					model.updateGameState(pitLabel.getPitIndex());
-					model.update();					
+					if (!model.getTurn()) {
+						model.updateGameState(pitLabel.getPitIndex());
+						model.update();			
+					}
 				}
 			});
 			pits.add(pitLabel);
@@ -74,6 +80,12 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 		poop.add(pits);
 		poop.add(playerBLabel);
 		add(poop);
+		if (model.getTurn()) {
+			playerTurn = new JLabel("Player B Turn");
+		} else {
+			playerTurn = new JLabel("Player A Turn");
+		}
+		add(playerTurn);
 	}
 
 	/**
@@ -85,10 +97,16 @@ public class MancalaFrame extends JPanel implements ChangeListener {
      * 
      */
 	private MancalaModel model;
-
+	JLabel playerTurn;
 	public void stateChanged(ChangeEvent arg0) {
 		// TODO Auto-generated method stub
-		//repaint();
+		if (model.getTurn()) {
+			playerTurn.setText("Player B Turn");
+		} else {
+			playerTurn.setText("Player A Turn");
+		}
+		playerTurn.repaint();
+		repaint();
 	}
 
 }
