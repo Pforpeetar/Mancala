@@ -18,10 +18,6 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 		// setSize(new Dimension(100, 100));
 		this.model = dataModel;
 		this.style = style;
-		
-		for (int i = 0; i < 12; i++) {
-			stoneArray[i] = model.getStones(i);
-		}
 
 		JPanel pits = new JPanel();
 		JPanel poop = new JPanel();
@@ -89,13 +85,9 @@ public class MancalaFrame extends JPanel implements ChangeListener {
      * 
      */
 	private MancalaModel model;
-	private int[] stoneArray = new int[12];
 
 	public void stateChanged(ChangeEvent arg0) {
 		// TODO Auto-generated method stub
-		for (int i = 0; i < 12; i++) {
-			stoneArray[i] = model.getStones(i);
-		}
 		//repaint();
 	}
 
