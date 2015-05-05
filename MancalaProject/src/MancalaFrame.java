@@ -34,12 +34,24 @@ public class MancalaFrame extends JPanel {
 
 		pits.setLayout(new GridLayout(2, defaultStones));
 
-		
-		for (int i = 0; i < 12; i++) {
+		//create A pits
+		for (int i = 0; i < 6; i++) {
 			final PitComponent pit = new PitComponent(100, 100, this.style,
 					defaultStones, model);
-			final PitLabel pitLabel = new PitLabel(pit, i, defaultStones);
-
+			final PitLabel pitLabel = new PitLabel(pit, i, defaultStones, "B", false);
+			pitLabel.addMouseListener(new MouseAdapter() {
+				public void mousePressed(MouseEvent event) {
+					// model.updateGameState(pitLabel.index);
+					System.out.println(pitLabel.index);
+				}
+			});
+			pits.add(pitLabel);
+		}
+		
+		for (int i = 7; i < 13; i++) {
+			final PitComponent pit = new PitComponent(100, 100, this.style,
+					defaultStones, model);
+			final PitLabel pitLabel = new PitLabel(pit, i, defaultStones, "A", false);
 			pitLabel.addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent event) {
 					// model.updateGameState(pitLabel.index);
@@ -50,11 +62,11 @@ public class MancalaFrame extends JPanel {
 		}
 		
 		final PitComponent playerA = new PitComponent(100, 200, this.style,
-				defaultStones, model);
-		final PitLabel playerALabel = new PitLabel(playerA, 6, 0);
+				0, model);
+		final PitLabel playerALabel = new PitLabel(playerA, 6, 0, "A", true);
 		final PitComponent playerB = new PitComponent(100, 200, this.style,
-				defaultStones, model);
-		final PitLabel playerBLabel = new PitLabel(playerB, 13, 0);
+				0, model);
+		final PitLabel playerBLabel = new PitLabel(playerB, 13, 0, "B", true);
 		
 		poop.add(playerALabel);
 		poop.add(pits);
