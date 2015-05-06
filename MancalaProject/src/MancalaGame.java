@@ -153,11 +153,11 @@ public class MancalaGame {
 			if (steps == 1 && (getStonesInPit(index) == 0) && index != PLAYER_A_PIT
 					&& index != PLAYER_B_PIT) {
 				if (index < 7 && !playerBTurn) {
-					dropStone(PLAYER_A_PIT, getStonesInPit(index + 7));
-					clearPit(index + 7);
+					dropStone(PLAYER_A_PIT, getStonesInPit(index + 6));
+					clearPit(index + 6);
 				} else if (index > 7 && playerBTurn) {
-					dropStone(PLAYER_B_PIT, getStonesInPit(index - 7));
-					clearPit(index - 7);
+					dropStone(PLAYER_B_PIT, getStonesInPit(index - 6));
+					clearPit(index - 6);
 				}
 			}
 
