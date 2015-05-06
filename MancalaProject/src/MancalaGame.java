@@ -166,7 +166,7 @@ public class MancalaGame {
 
 			index++;
 			steps--;
-			//printBoard();
+			printBoard();
 		}
 
 		// Extra turn if last stone lands on own mancala

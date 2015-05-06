@@ -23,7 +23,7 @@ public class PitLabel extends JPanel implements ChangeListener {
 		pitIndex = i;
 		countLabel = new JLabel("" + stoneAmount);
 
-		if (pitIndex != 6 || pitIndex != 13) {
+		if (pitIndex != 6 && pitIndex != 13) {
 			if (pitIndex < 6) {
 			indexLabel = new JLabel("B" + (pitIndex+1) + ":");
 			add(indexLabel);
@@ -31,6 +31,14 @@ public class PitLabel extends JPanel implements ChangeListener {
 			indexLabel = new JLabel("A" + (pitIndex-6) + ":");
 			add(indexLabel);
 			}
+		}
+		if (pitIndex == 6) {
+			indexLabel = new JLabel("A");
+			add(indexLabel);
+		}
+		if (pitIndex == 13) {
+			indexLabel = new JLabel("B");
+			add(indexLabel);
 		}
 		add(countLabel);
 		add(stoneLabel);
