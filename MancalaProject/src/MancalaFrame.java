@@ -28,7 +28,7 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 		pits.setLayout(new GridLayout(2, defaultStones));
 
 		//create A pits
-		for (int i = 0; i < 6; i++) {
+		for (int i = 12; i >= 7; i--) {
 			final PitComponent pit = new PitComponent(100, 100, this.style,
 					defaultStones, model, i);
 			final PitLabel pitLabel = new PitLabel(pit, i, model);
@@ -47,7 +47,7 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 			model.addChangeListener(pit);
 		}
 		
-		for (int i = 7; i < 13; i++) {
+		for (int i = 0; i < 6; i++) {
 			final PitComponent pit = new PitComponent(100, 100, this.style,
 					defaultStones, model, i);
 			final PitLabel pitLabel = new PitLabel(pit, i, model);
@@ -66,12 +66,14 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 			model.addChangeListener(pit);
 		}
 		
+		//I swapped the numbers for playerA and playerB
+		
 		final PitComponent playerA = new PitComponent(100, 200, this.style,
-				0, model, 6);
-		final PitLabel playerALabel = new PitLabel(playerA, 6, model);
-		final PitComponent playerB = new PitComponent(100, 200, this.style,
 				0, model, 13);
-		final PitLabel playerBLabel = new PitLabel(playerB, 13, model);
+		final PitLabel playerALabel = new PitLabel(playerA, 13, model);
+		final PitComponent playerB = new PitComponent(100, 200, this.style,
+				0, model, 6);
+		final PitLabel playerBLabel = new PitLabel(playerB, 6, model);
 		model.addChangeListener(playerA);
 		model.addChangeListener(playerALabel);
 		model.addChangeListener(playerB);

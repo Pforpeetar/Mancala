@@ -22,6 +22,7 @@ public class MancalaTester {
 	static GridBagConstraints c;
 	static MancalaModel model;
 	public static void main(String[] arg0){
+		
 		startFrame = new JFrame();
     	startFrame.setSize(new Dimension(250,250));
     	c = new GridBagConstraints();
