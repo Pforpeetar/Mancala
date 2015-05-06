@@ -3,6 +3,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
@@ -88,6 +89,11 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 			playerTurn = new JLabel("Player A Turn");
 		}
 		add(playerTurn);
+		
+		JButton undo = new JButton("undo"+"[3]");
+		JButton quit = new JButton("quit");
+		add(undo);
+		add(quit);
 	}
 
 	/**

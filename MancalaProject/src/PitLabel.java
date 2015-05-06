@@ -33,11 +33,11 @@ public class PitLabel extends JPanel implements ChangeListener {
 			}
 		}
 		if (pitIndex == 6) {
-			indexLabel = new JLabel("B");
+			indexLabel = new JLabel("A");
 			add(indexLabel);
 		}
 		if (pitIndex == 13) {
-			indexLabel = new JLabel("A");
+			indexLabel = new JLabel("B");
 			add(indexLabel);
 		}
 		add(countLabel);

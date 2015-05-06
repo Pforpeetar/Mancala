@@ -93,6 +93,7 @@ public class MancalaTester {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				MancalaFrame mainFrame = new MancalaFrame(defaultStones, new BlueStyle(), model);
+				
 				model.addChangeListener(mainFrame);
 				//mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				//mainFrame.setVisible(true);
