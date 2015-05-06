@@ -319,28 +319,31 @@ public class MancalaGame {
 		} else {
 			System.out.println("PlayerA Turn.");
 		}
-
-		for (int i = 0; i < PIT_NUMBERS.length / 2 - 1; i++) {
+		
+		System.out.print("     ");
+		
+		for (int i = PIT_NUMBERS.length - 2; i >= PIT_NUMBERS.length/2; i--) {
 			System.out.print(PIT_NUMBERS[i] + " ");
+		}
+		
+		//
+		System.out.println();
+		
+		System.out.print(" " + getStonesInPit(board.size()-1) + " ");
+		System.out.print("  ");
+		for (int i = board.size() - 2; i >= board.size()/2; i--) {
+			System.out.print(" " + getStonesInPit(i) + " ");
 		}
 		//
 		System.out.println();
-
+		System.out.print("     ");
 		for (int i = 0; i < board.size() / 2; i++) {
 			System.out.print(" " + getStonesInPit(i) + " ");
 		}
-		System.out.print(":A");
 
 		System.out.println();
-
-		for (int i = board.size() / 2; i < board.size(); i++) {
-			System.out.print(" " + getStonesInPit(i) + " ");
-		}
-		System.out.print(":B");
-		//
-		System.out.println();
-
-		for (int i = PIT_NUMBERS.length / 2; i < PIT_NUMBERS.length - 1; i++) {
+		System.out.print("     ");
+		for (int i = 0; i < PIT_NUMBERS.length / 2 - 1; i++) {
 			System.out.print(PIT_NUMBERS[i] + " ");
 		}
 
