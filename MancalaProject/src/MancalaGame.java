@@ -182,9 +182,9 @@ public class MancalaGame {
 	}
 	
 	/**
-	 * 
+	 * return 0 if A wins, 1 is B wins, 2 if tie
 	 * */
-	private void determineWinner() {
+	public void determineWinner() {
 
 		int ATotal = 0;
 		int BTotal = 0;

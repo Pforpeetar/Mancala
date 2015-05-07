@@ -29,6 +29,10 @@ public class MancalaModel {
 	 */
 	public void updateGameState(int pit) {
 		mancalaData.step(pit);
+		//check if game is over after each step. if so, determine winner
+		if(mancalaData.gameOverCheck()){
+			mancalaData.determineWinner();
+		}
 	}
 
 	/**
