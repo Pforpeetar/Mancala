@@ -6,14 +6,6 @@ import java.util.*;
  * 
  */
 public class BlueStyle implements StyleManager {
-
-    /**
-     * 
-     */
-    public BlueStyle() {
-    }
-
-
     /**
      * 
      */

@@ -6,16 +6,6 @@ import java.util.*;
  * 
  */
 public class RedStyle implements StyleManager {
-	
-    /**
-     * 
-     */
-    public RedStyle() {
-    	
-    }
-
-
-
 
     /**
      * 

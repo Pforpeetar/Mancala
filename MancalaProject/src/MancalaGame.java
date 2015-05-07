@@ -54,9 +54,10 @@ public class MancalaGame {
 	public int getStonesLeft(){
 		return stonesLeft;
 	}
+	
 	/**
 	 * 
-	 * */
+	 */
 	public int getStonesInPit(int index){
 		//System.out.println(index);
 		//System.out.println(board.get(index));
@@ -65,7 +66,7 @@ public class MancalaGame {
 	
 	/**
 	 * 
-	 * */
+	 */
 	private void dropStone(int index, int amount){
 		
 		board.set(index, getStonesInPit(index) + amount);
@@ -74,14 +75,14 @@ public class MancalaGame {
 	
 	/**
 	 * 
-	 * */
+	 */
 	private void clearPit(int index){
 		board.set(index, 0);
 	}
 	
 	/**
 	 * 
-	 * */
+	 */
 	private void changeTurn(){
 		playerBTurn = !playerBTurn;
 	}
@@ -311,7 +312,6 @@ public class MancalaGame {
 	/**
 	 * Prints the mancala board onto the console.
 	 * */
-
 	private void printBoard() {
 
 		if (playerBTurn) {

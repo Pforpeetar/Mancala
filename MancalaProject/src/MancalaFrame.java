@@ -1,5 +1,7 @@
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -28,15 +30,15 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 
 		pits.setLayout(new GridLayout(2, defaultStones));
 
-		//create A pits
+		//create B pits
 		for (int i = 12; i >= 7; i--) {
 			final PitComponent pit = new PitComponent(100, 100, this.style,
 					defaultStones, model, i);
 			final PitLabel pitLabel = new PitLabel(pit, i, model);
 			pitLabel.addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent event) {
-					//System.out.println("Pit Label: " + pitLabel.getPitIndex() + " Stones: " + pitLabel.getStone());
-					//System.out.println("Model Pit: " + model.getStones(pitLabel.getPitIndex()) + " Stones: " + model.getStones(pitLabel.getPitIndex()));					
+					//if B's turn, call step method on index of pressed pit
+					//update model, to call stateChanged
 					if (model.getTurn()) {
 						model.updateGameState(pitLabel.getPitIndex());
 						model.update();			
@@ -48,14 +50,15 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 			model.addChangeListener(pit);
 		}
 		
+		//create A pits
 		for (int i = 0; i < 6; i++) {
 			final PitComponent pit = new PitComponent(100, 100, this.style,
 					defaultStones, model, i);
 			final PitLabel pitLabel = new PitLabel(pit, i, model);
 			pitLabel.addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent event) {
-					//System.out.println("Pit Label: " + pitLabel.getPitIndex() + " Stones: " + pitLabel.getStone());
-					//System.out.println("Model Pit: " + model.getStones(pitLabel.getPitIndex()) + " Stones: " + model.getStones(pitLabel.getPitIndex()));					
+					//if A's turn, call step method on index of pressed pit
+					//update model, to call stateChanged
 					if (!model.getTurn()) {
 						model.updateGameState(pitLabel.getPitIndex());
 						model.update();			
@@ -68,7 +71,6 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 		}
 		
 		//I swapped the numbers for playerA and playerB
-		
 		final PitComponent playerA = new PitComponent(100, 200, this.style,
 				0, model, 13);
 		final PitLabel playerALabel = new PitLabel(playerA, 13, model);
@@ -91,7 +93,17 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 		add(playerTurn);
 		
 		JButton undo = new JButton("undo"+"[3]");
+		undo.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				//make it so that a player can undo up to 3 times in his turn
+			}
+		});
 		JButton quit = new JButton("quit");
+		quit.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}		
+		});
 		add(undo);
 		add(quit);
 	}
@@ -105,7 +117,15 @@ public class MancalaFrame extends JPanel implements ChangeListener {
      * 
      */
 	private MancalaModel model;
+	
+	/**
+	 * 
+	 */
 	JLabel playerTurn;
+	
+	/**
+	 * 
+	 */
 	public void stateChanged(ChangeEvent arg0) {
 		// TODO Auto-generated method stub
 		if (model.getTurn()) {

@@ -80,9 +80,9 @@ public class MancalaTester {
 				c.gridwidth = 100;
 				c.gridheight = 100;
 				startFrame.add(mainFrame, c);
-				//startFrame.remove(startTitle);
-				//startFrame.remove(redStyle);
-				//startFrame.remove(blueStyle);
+				startFrame.remove(startTitle);
+				startFrame.remove(redStyle);
+				startFrame.remove(blueStyle);
 				startFrame.pack();
 				startFrame.setVisible(true);
 			}
@@ -103,9 +103,9 @@ public class MancalaTester {
 				c.gridheight = 100;
 				mainFrame.setSize(new Dimension(100, 100));
 				startFrame.add(mainFrame, c);
-				//startFrame.remove(startTitle);
-				//startFrame.remove(redStyle);
-				//startFrame.remove(blueStyle);
+				startFrame.remove(startTitle);
+				startFrame.remove(redStyle);
+				startFrame.remove(blueStyle);
 				startFrame.pack();
 				startFrame.setVisible(true);
 			}
