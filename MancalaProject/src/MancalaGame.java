@@ -13,11 +13,11 @@ public class MancalaGame {
 	private ArrayList<Integer> previous;
 
 	private int stonesPerPit;
-	//I just realized that we don't need stonesLeft, should i delete it?
 	private int stonesLeft;
 
 	// FALSE = A, TRUE = B
 	private boolean playerBTurn;
+	private boolean extraTurn = false;
 
 	/**
 	 * Constructor
@@ -27,12 +27,16 @@ public class MancalaGame {
 		this.previous = new ArrayList<Integer>();
 		this.stonesPerPit = stonesPerPit;
 		playGUIVersion();
-		// stonesLeft = stonesPerPit * NUMBER_OF_PITS;
-		// Player A goes first
-		// playerBTurn = false;
-		// this.resetBoard();
 	}
 
+	/**
+	 * method to set player turn
+	 * @param turn true - set to B turn, false - set to A turn
+	 */
+	public void setPlayerTurn(boolean turn){
+		playerBTurn = turn;
+	}
+	
 	/**
 	 * 
 	 * @return board
@@ -49,6 +53,13 @@ public class MancalaGame {
 	}
 	
 	/**
+	 * method to get rid of previous board info and replace with current board info.
+	 */
+	public void erasePrevious(){
+		previous = board;
+	}
+	
+	/**
 	 * @return stonesLeft
 	 */
 	public int getStonesLeft(){
@@ -59,8 +70,6 @@ public class MancalaGame {
 	 * 
 	 */
 	public int getStonesInPit(int index){
-		//System.out.println(index);
-		//System.out.println(board.get(index));
 		return board.get(index);
 	}
 	
@@ -83,10 +92,25 @@ public class MancalaGame {
 	/**
 	 * 
 	 */
-	private void changeTurn(){
+	public void changeTurn(){
 		playerBTurn = !playerBTurn;
 	}
 	
+	/**
+	 * 
+	 * @return true if had extraTurn, false if not
+	 */
+	public boolean checkExtraTurn(){
+		return extraTurn;
+	}	
+	
+	/**
+	 * 
+	 * @param set
+	 */
+	public void setExtraTurn(boolean set){
+		extraTurn= set;
+	}
 	/**
 	 * This clears the board and places stones into each pit.
 	 * */
@@ -123,13 +147,22 @@ public class MancalaGame {
 		int index;
 		int steps;
 
+		//check to see if a steal occurred 
+		boolean stealStones = false;
+		
 		// Make a copy of the board
+		
 		previous = new ArrayList<Integer>(board);
 
 		index = pitNumber;
 
 		// Amount of stones in the pit selected
 		steps = getStonesInPit(index);
+		
+		//if selected pit is empty, make the player choose a pit with stones
+		if(steps==0){
+			changeTurn();
+		}
 
 		// Clear the chosen pit
 		clearPit(index);
@@ -151,20 +184,28 @@ public class MancalaGame {
 
 			// if you place last stone on empty pit that is on your side you get
 			// all the stones on the adjacent pit
+			//it's 12 - index, not index - 6 and index + 6
 			if (steps == 1 && (getStonesInPit(index) == 0) && index != PLAYER_A_PIT
 					&& index != PLAYER_B_PIT) {
-				if (index < 7 && !playerBTurn) {
-					dropStone(PLAYER_A_PIT, getStonesInPit(index + 6));
-					clearPit(index + 6);
-				} else if (index > 7 && playerBTurn) {
-					dropStone(PLAYER_B_PIT, getStonesInPit(index - 6));
-					clearPit(index - 6);
+				if (index < PLAYER_A_PIT && !playerBTurn&& getStonesInPit(12-index)>0) {
+					dropStone(PLAYER_A_PIT, getStonesInPit(12 - index));
+					clearPit(12 - index);
+					dropStone(PLAYER_A_PIT, 1);
+					stealStones =true;
+				} else if (index > 6 && playerBTurn && getStonesInPit(12-index)>0) {
+					dropStone(PLAYER_B_PIT, getStonesInPit(12 - index));
+					clearPit(12 - index);
+					dropStone(PLAYER_B_PIT, 1);
+					stealStones =true;
 				}
 			}
 
 			// Drop stone into pit
-			dropStone(index, 1);
-
+			if(stealStones == false)
+				dropStone(index, 1);
+			else 
+				stealStones = false; 
+			
 			index++;
 			steps--;
 			printBoard();
@@ -173,8 +214,10 @@ public class MancalaGame {
 		// Extra turn if last stone lands on own mancala
 		if (PLAYER_A_PIT == index - 1) {
 			changeTurn();
+			extraTurn = true;
 		} else if (PLAYER_B_PIT == index - 1) {
 			changeTurn();
+			extraTurn = true;
 		}
 
 		// Change the turn
@@ -189,12 +232,20 @@ public class MancalaGame {
 		int ATotal = 0;
 		int BTotal = 0;
 		int j = board.size() / 2;
-
+		
+		
 		for (int i = 0; i < board.size() / 2 ; i++) {
 			ATotal += getStonesInPit(i);
 			BTotal += getStonesInPit(j);
 			j++;
 		}
+
+		for(int i =0 ; i<board.size();i++){
+			clearPit(i);
+		}
+		dropStone(PLAYER_A_PIT, ATotal);
+		dropStone(PLAYER_B_PIT, BTotal);
+		
 
 		if (ATotal > BTotal) {
 			System.out.println("Player A wins with: " + ATotal);
@@ -214,13 +265,13 @@ public class MancalaGame {
 		int countA = 0;
 		int countB = 0;
 
-		for (int i = 0; i < board.size() / 2 - 1; i++) {
+		for (int i = 0; i < PLAYER_A_PIT; i++) {
 			if (getStonesInPit(i) == 0) {
 				countA++;
 			}
 		}
 
-		for (int i = board.size() / 2; i < board.size() - 1; i++) {
+		for (int i = PLAYER_A_PIT; i < PLAYER_B_PIT; i++) {
 			if (getStonesInPit(i) == 0) {
 				countB++;
 			}
@@ -305,7 +356,6 @@ public class MancalaGame {
 		// Player A goes first
 		playerBTurn = false;
 		this.resetBoard();
-		//determineWinner();
 
 	}
 	

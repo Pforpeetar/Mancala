@@ -21,6 +21,11 @@ public class MancalaTester {
 	static JFrame startFrame;
 	static GridBagConstraints c;
 	static MancalaModel model;
+	
+	/**
+	 * main tester method
+	 * @param arg0 input redirection if necessary
+	 */
 	public static void main(String[] arg0){
 		
 		startFrame = new JFrame();
@@ -31,6 +36,9 @@ public class MancalaTester {
 		selectDefaultStones();
 	}
 	
+	/**
+	 * Method to select default number of stones
+	 */
 	public static void selectDefaultStones() {
 		final JLabel stoneFieldPrompt = new JLabel("Enter Default Stone Amount");
 		final JTextField stoneField = new JTextField("3");
@@ -59,9 +67,10 @@ public class MancalaTester {
 		startFrame.setVisible(true);
 	}
 
-    /**
-     * 
-     */
+	/**
+	 * 
+	 * @param defaultStones
+	 */
     public static void selectStyle(final int defaultStones) {
         // TODO implement here
     	final JLabel startTitle = new JLabel("Choose a style");
@@ -127,19 +136,6 @@ public class MancalaTester {
     	startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	startFrame.pack();
 		startFrame.setVisible(true);
-    }
-    /**
-     * 
-     */
-    public static void quit() {
-        // TODO implement here
-    }
-
-    /**
-     * 
-     */
-    public static void undo() {
-        // TODO implement here
     }
 
 }
