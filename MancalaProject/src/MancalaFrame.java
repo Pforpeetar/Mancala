@@ -69,6 +69,11 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 	 */
 	private boolean firstBTime = true;
 	
+	/**
+	 * True if game is over.
+	 */
+	private boolean gameOver = false;
+	
 	
 	/**
 	 * 
@@ -162,29 +167,30 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 		JButton undo = new JButton("undo");
 		undo.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				//make it so that the undo button doesn't work anymore for a player after it is pressed 3 times!
-				if(PlayerAUndoCount>2 || PlayerBUndoCount>2){
-					firstTime = false;
-					if(PlayerAUndoCount>2){ PlayerAUndoCount = 0; firstATime = false;}
-					if(PlayerBUndoCount>2){ PlayerBUndoCount = 0; firstBTime = false;}
-					model.resetPrev();
-				} else if(playerStepped==true&&firstTime==true){
-					model.mancalaUndo(model.getTurn());	
-					if(model.checkExtraTurn()){
-						model.setExtraTurntoFalse();
-					}
-					model.update();
-					playerStepped = false;
-					if(playerTurn.getText().equals("Player A Turn")){
-						PlayerAUndoCount++;
-						System.out.println("# of times Player A hit undo: "+ PlayerAUndoCount);
-					}
-					if(playerTurn.getText().equals("Player B Turn")){
-						PlayerBUndoCount++;
-						System.out.println("# of times Player B hit undo: " +PlayerBUndoCount);
-					}
-					if(PlayerBUndoCount==2||PlayerAUndoCount==2){
-						System.out.println("You have one undo left. Use it wisely!");
+				if(gameOver == false){
+					if(PlayerAUndoCount>2 || PlayerBUndoCount>2){
+						firstTime = false;
+						if(PlayerAUndoCount>2){ PlayerAUndoCount = 0; firstATime = false;}
+						if(PlayerBUndoCount>2){ PlayerBUndoCount = 0; firstBTime = false;}
+						model.resetPrev();
+					} else if(playerStepped==true&&firstTime==true){
+						model.mancalaUndo(model.getTurn());	
+						if(model.checkExtraTurn()){
+							model.setExtraTurntoFalse();
+						}
+						model.update();
+						playerStepped = false;
+						if(playerTurn.getText().equals("Player A Turn")){
+							PlayerAUndoCount++;
+							System.out.println("# of times Player A hit undo: "+ PlayerAUndoCount);
+						}
+						if(playerTurn.getText().equals("Player B Turn")){
+							PlayerBUndoCount++;
+							System.out.println("# of times Player B hit undo: " +PlayerBUndoCount);
+						}
+						if(PlayerBUndoCount==2||PlayerAUndoCount==2){
+							System.out.println("You have one undo left. Use it wisely!");
+						}
 					}
 				}
 			}
@@ -211,8 +217,18 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 		} else {
 			playerTurn.setText("Player A Turn");
 		}
+		
+		if (model.checkGameOver() && gameOver == false) {
+			gameOver = true;
+			JFrame resultFrame = new JFrame();
+			model.getResults();
+			model.update();
+			JOptionPane.showMessageDialog(resultFrame, model.getResults());
+			//model.update();
+		}
 		playerTurn.repaint();
 		repaint();
+	
 	}
 
 }

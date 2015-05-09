@@ -48,18 +48,31 @@ public class MancalaTester {
 	 * Method to prompt user to select default number of stones
 	 */
 	public static void selectDefaultStones() {
-		final JLabel stoneFieldPrompt = new JLabel("Enter Default Stone Amount");
-		final JTextField stoneField = new JTextField("3");
-		final JButton setStones = new JButton("Set");
-		setStones.addActionListener(new ActionListener() {
+		final JLabel stoneFieldPrompt = new JLabel("Choose Default Amount:");
+		//final JTextField stoneField = new JTextField("3");
+		final JButton threeStones = new JButton("3");
+		final JButton fourStones = new JButton("4");
+		threeStones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				int stoneAmount = Integer.parseInt(stoneField.getText());
+				int stoneAmount = 3;
 				selectStyle(stoneAmount);
 				model = new MancalaModel(stoneAmount);
 				startFrame.remove(stoneFieldPrompt);
-				startFrame.remove(stoneField);
-				startFrame.remove(setStones);
+				startFrame.remove(fourStones);
+				startFrame.remove(threeStones);
+			}
+			
+		});
+		fourStones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int stoneAmount = 4;
+				selectStyle(stoneAmount);
+				model = new MancalaModel(stoneAmount);
+				startFrame.remove(stoneFieldPrompt);
+				startFrame.remove(threeStones);
+				startFrame.remove(fourStones);
 			}
 			
 		});
@@ -68,9 +81,9 @@ public class MancalaTester {
 		startFrame.add(stoneFieldPrompt, c);
 		c.gridx = 0;
 		c.gridy = 1;
-		startFrame.add(stoneField, c);
+		startFrame.add(threeStones, c);
 		c.gridy = 2;
-		startFrame.add(setStones, c);
+		startFrame.add(fourStones, c);
 		startFrame.pack();
 		startFrame.setVisible(true);
 	}

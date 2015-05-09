@@ -276,8 +276,8 @@ public class MancalaGame {
 	/**
 	 * Counts up the number of stones Player A and B has. Winner is the one with the most stones. 
 	 * */
-	public void determineWinner() {
-
+	public String determineWinner() {
+		String result;
 		int ATotal = 0;
 		int BTotal = 0;
 		int j = board.size() / 2;
@@ -297,12 +297,15 @@ public class MancalaGame {
 		
 
 		if (ATotal > BTotal) {
-			System.out.println("Player A wins with: " + ATotal);
+			result = "Player A wins with: " + ATotal;
 		} else if (BTotal > ATotal) {
-			System.out.println("Player B wins with: " + BTotal);
+			result = "Player B wins with: " + BTotal;
 		} else {
-			System.out.println("Tie game!");
+			result = "Tie game!";
 		}
+		
+		printBoard();
+		return result;
 
 	}
 

@@ -58,9 +58,22 @@ public class MancalaModel {
 	 */
 	public void mancalaStep(int pit) {
 		mancalaData.step(pit);
-		//if game is over after each step move. if so, determine winner
-		if(mancalaData.gameOverCheck())
-			mancalaData.determineWinner();
+	}
+	
+	/**
+	 * Check if the game is over. 
+	 * @return true is game is over. 
+	 */
+	public boolean checkGameOver() {
+		return mancalaData.gameOverCheck();
+	}
+	
+	/**
+	 * Return result, either A wins, B wins or tie. 
+	 * @return String result of game
+	 */
+	public String getResults() {
+		return mancalaData.determineWinner();
 	}
 
 	/**
@@ -96,7 +109,6 @@ public class MancalaModel {
 	 * @return number of stones in selected pit
 	 */
 	public int getStones(int pit) {
-		//System.out.println("Get Stone in Pit " + pit + " is " + mancalaData.getStonesInPit(pit));
 		return mancalaData.getStonesInPit(pit);
 	}
 	
