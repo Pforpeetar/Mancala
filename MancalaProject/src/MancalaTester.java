@@ -15,17 +15,25 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- * 
+ * Tester for the gui mancala. Uses MVC and strategy pattern. 
+ * @author Samson Lee, Peter Pham, Benjamin Liu
  */
 public class MancalaTester {
+	/**
+	 * initial frame
+	 */
 	static JFrame startFrame;
-	static GridBagConstraints c;
-	static MancalaModel model;
 	
 	/**
-	 * main tester method
-	 * @param arg0 input redirection if necessary
+	 * constraints for gridbaglayout 
 	 */
+	static GridBagConstraints c;
+	
+	/**
+	 * model that contains game information
+	 */
+	static MancalaModel model;
+	
 	public static void main(String[] arg0){
 		
 		startFrame = new JFrame();
@@ -37,7 +45,7 @@ public class MancalaTester {
 	}
 	
 	/**
-	 * Method to select default number of stones
+	 * Method to prompt user to select default number of stones
 	 */
 	public static void selectDefaultStones() {
 		final JLabel stoneFieldPrompt = new JLabel("Enter Default Stone Amount");
@@ -68,8 +76,9 @@ public class MancalaTester {
 	}
 
 	/**
-	 * 
-	 * @param defaultStones
+	 * Method to prompt user to select preferred style. Uses strategy pattern. 
+	 * 	Adds the main game frame. removes the previous user prompts. 
+	 * @param defaultStones default number of stones to be used. Put into view portion. 
 	 */
     public static void selectStyle(final int defaultStones) {
         // TODO implement here
@@ -133,6 +142,7 @@ public class MancalaTester {
     	c.gridx = 3;
     	c.gridy = 1;
     	startFrame.add(blueStyle, c);
+    	startFrame.setTitle("MANCALA");
     	startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	startFrame.pack();
 		startFrame.setVisible(true);

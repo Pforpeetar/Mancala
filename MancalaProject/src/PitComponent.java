@@ -12,18 +12,50 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * 
+ * Delegated pit Component. This creates a pit with the preferred style, stones per pit.
+ * This is considered the View portion. 
+ * @author Samson Lee, Peter Pham, Benjamin Liu
  */
 public class PitComponent implements Icon, ChangeListener {
-	private int width;
-	private int height;
-	private StyleManager style;
-	private int stones;
-	private MancalaModel model;
-	private int index;
 	/**
-     * 
-     */
+	 * width of pit
+	 */
+	private int width;
+	
+	/**
+	 * height of pit
+	 */
+	private int height;
+	
+	/**
+	 * style of pit
+	 */
+	private StyleManager style;
+	
+	/**
+	 * number of stones in pit
+	 */
+	private int stones;
+	
+	/**
+	 * model data
+	 */
+	private MancalaModel model;
+	
+	/**
+	 * index of this pit
+	 */
+	private int index;
+	
+	/**
+	 * Constructor for pit component
+	 * @param width width of this
+	 * @param height height of this
+	 * @param style style of this
+	 * @param stones stones in this
+	 * @param model model info 
+	 * @param index index of this
+	 */
 	public PitComponent(int width, int height, StyleManager style, int stones,
 			MancalaModel model, int index) {
 		this.width = width;
@@ -35,26 +67,28 @@ public class PitComponent implements Icon, ChangeListener {
 	}
 
 	/**
-	 * @param Graphics
-	 *            g
+	 * get height of this component
 	 */
-	public void paintComponent(Graphics g) {
-		// TODO implement here
-	}
-
 	public int getIconHeight() {
-		// TODO Auto-generated method stub
 		return height;
 	}
 
+	/**
+	 * get width of this component
+	 */
 	public int getIconWidth() {
-		// TODO Auto-generated method stub
 		return width;
 	}
 
+	/**
+	 * color choices of the stones in this component
+	 */
 	Color[] arrayOfColors = { Color.PINK, Color.BLACK, Color.YELLOW,
 			Color.CYAN, Color.WHITE, Color.ORANGE, Color.GREEN, Color.MAGENTA };
 
+	/**
+	 * method of Icon interface. paints the pit.
+	 */
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
 		Graphics2D g2 = (Graphics2D) g;
@@ -76,6 +110,9 @@ public class PitComponent implements Icon, ChangeListener {
 
 	}
 
+	/**
+	 * if there is a state change, reset necessary elements according to model data.
+	 */
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
 		stones = model.getStones(index);

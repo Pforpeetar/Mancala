@@ -14,13 +14,68 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * 
+ * Frame that holds all the pits, and undo & quit button
+ * 	This is the controller/view portion of the program
+ * @author Samson Lee, Peter Pham, Benjamin Liu
  */
 public class MancalaFrame extends JPanel implements ChangeListener {
 
 	/**
-     * 
+     * Instance of the style to be plugged in
      */
+	private StyleManager style;
+
+	/**
+     * Instance of the model class. 
+     */
+	private MancalaModel model;
+	
+	/**
+	 * Label to show current player's name
+	 */
+	JLabel playerTurn;
+	
+	/**
+	 * count for player A undos
+	 */
+	private int PlayerAUndoCount = 0;
+	
+	/**
+	 * count for player B undos
+	 */
+	private int PlayerBUndoCount = 0;
+	
+	/**
+	 * true if player used step move, false if not
+	 */
+	private boolean playerStepped = false;
+	
+	/**
+	 * True if it is the first time a player iterates through his/her undo moves. False if player has gone through 3 undos. 
+	 * 	This forces the player to make a step move, after he/she uses all 3 undos. 
+	 * 	Changed to false, after the playerundocount > 2. Changed to true after the opposite player makes a step. 
+	 */
+	private boolean firstTime = true;
+	
+	/**
+	 * True if it is first time Player A iterates through undo moves. Changes to false when all 3 undos used.
+	 * 	Changes back to true, when Player B steps (when the opposite player makes a step) 
+	 */
+	private boolean firstATime = true;
+	
+	/**
+	 * True if it is first time Player B iterates through undo moves. Changes to false when all 3 undos used.
+	 * 	Changes back to true when Player A steps (when the opposite player makes a step)
+	 */
+	private boolean firstBTime = true;
+	
+	
+	/**
+	 * 
+	 * @param defaultStones default number of stones
+	 * @param style specific style to be plugged in via strategy pattern
+	 * @param dataModel instance of the model class
+	 */
 	public MancalaFrame(int defaultStones, StyleManager style, final MancalaModel dataModel) {
 		// setSize(new Dimension(100, 100));
 		this.model = dataModel;
@@ -146,29 +201,8 @@ public class MancalaFrame extends JPanel implements ChangeListener {
 	}
 
 	/**
-     * 
-     */
-	private StyleManager style;
-
-	/**
-     * 
-     */
-	private MancalaModel model;
-	
-	/**
-	 * 
-	 */
-	JLabel playerTurn;
-	
-	private int PlayerAUndoCount = 0;
-	private int PlayerBUndoCount = 0;
-	private boolean playerStepped = false;
-	private boolean firstTime = true;
-	private boolean firstATime = true;
-	private boolean firstBTime = true;
-	
-	/**
-	 * 
+	 * When there is a change event, when update is called by the model, repaint the frame with model information. Usually means changing turns
+	 * 	as well.
 	 */
 	public void stateChanged(ChangeEvent arg0) {
 		// TODO Auto-generated method stub

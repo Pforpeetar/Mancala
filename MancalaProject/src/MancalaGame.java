@@ -1,27 +1,67 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Back-end portion of mancala program. 
+ * @author Samson Lee, Peter Pham, Benjamin Liu
+ */
 public class MancalaGame {
 
+	/**
+	 * Number of pits not including players mancala
+	 */
 	final int NUMBER_OF_PITS = 12;
+	
+	/**
+	 * Index of player A's mancala
+	 */
 	final int PLAYER_A_PIT = 6;
+	
+	/**
+	 * Index of player B's mancala
+	 */
 	final int PLAYER_B_PIT = 13;
+	
+	/**
+	 * String representation of the board index layout. Counter-clockwise layout.
+	 */
 	final static String PIT_NUMBERS[] = { "A1", "A2", "A3", "A4", "A5", "A6",
 			"playerA", "B1", "B2", "B3", "B4", "B5", "B6", "playerB" };
 
+	/**
+	 *  Board information. Elements represent stones in particular index
+	 */
 	private ArrayList<Integer> board;
+	
+	/**
+	 * Previous board information
+	 */
 	private ArrayList<Integer> previous;
 
+	/**
+	 * default stones per pit
+	 */
 	private int stonesPerPit;
+	
+	/**
+	 * stones left in pits
+	 */
 	private int stonesLeft;
 
-	// FALSE = A, TRUE = B
+	/**
+	 * false is A, true is B
+	 */
 	private boolean playerBTurn;
+	
+	/**
+	 * true if extra turn is granted, false if not
+	 */
 	private boolean extraTurn = false;
 
 	/**
-	 * Constructor
-	 * */
+	 * Constructor for MancalaGame. 
+	 * @param stonesPerPit stones per pit. Can be 3 or 4.
+	 */
 	public MancalaGame(int stonesPerPit) {
 		this.board = new ArrayList<Integer>();
 		this.previous = new ArrayList<Integer>();
@@ -38,15 +78,16 @@ public class MancalaGame {
 	}
 	
 	/**
-	 * 
-	 * @return board
+	 * Accessor for board information
+	 * @return board arrayList containing board information
 	 */
 	public ArrayList<Integer> getBoard(){
 		return board;
 	}
 	
 	/**
-	 * 
+	 * Accessor for previous board information
+	 * @return previous arrayList containing previous information
 	 */
 	public ArrayList<Integer> getPrevious(){
 		return previous;
@@ -60,44 +101,48 @@ public class MancalaGame {
 	}
 	
 	/**
-	 * @return stonesLeft
+	 * return number of stones left in pits
+	 * @return stonesLeft number of stones left in pits
 	 */
 	public int getStonesLeft(){
 		return stonesLeft;
 	}
 	
 	/**
-	 * 
+	 * Get stones in specific index
+	 * @param index index of pit to be taken
+	 * @return number of stones in selected pit
 	 */
 	public int getStonesInPit(int index){
 		return board.get(index);
 	}
 	
 	/**
-	 * 
+	 * Drop stone(s) into specific pit
+	 * @param index index of pit 
+	 * @param amount number of stones to be dropped into pit index
 	 */
-	private void dropStone(int index, int amount){
-		
-		board.set(index, getStonesInPit(index) + amount);
-		
+	private void dropStone(int index, int amount){	
+		board.set(index, getStonesInPit(index) + amount);	
 	}
 	
 	/**
-	 * 
+	 * Clear pit at certain index
+	 * @param index index to be cleared
 	 */
 	private void clearPit(int index){
 		board.set(index, 0);
 	}
 	
 	/**
-	 * 
+	 * Change player turn. 
 	 */
 	public void changeTurn(){
 		playerBTurn = !playerBTurn;
 	}
 	
 	/**
-	 * 
+	 * Check if player had an extra turn (last stone dropped into own mancala)
 	 * @return true if had extraTurn, false if not
 	 */
 	public boolean checkExtraTurn(){
@@ -105,12 +150,14 @@ public class MancalaGame {
 	}	
 	
 	/**
-	 * 
+	 * Set if player has extra turn. 
+	 * Used to correct edge case when player gets extra turn but the player turn is changed to the opponent. 
 	 * @param set
 	 */
 	public void setExtraTurn(boolean set){
 		extraTurn= set;
 	}
+	
 	/**
 	 * This clears the board and places stones into each pit.
 	 * */
@@ -133,15 +180,17 @@ public class MancalaGame {
 
 	/**
 	 * Return to a previous state.
-	 * */
+	 */
 	public void undo() {
 		changeTurn();
 		board = new ArrayList<Integer>(previous);
 	}
 
 	/**
-	 * 
-	 * */
+	 * Take stones at pitNumber, and drop a stone one by one into each pit moving counter-clockwise. 
+	 * 		checks if player gets extra turn, or steals opponents' stones. 
+	 * @param pitNumber
+	 */
 	public void step(int pitNumber) {
 
 		int index;
@@ -225,7 +274,7 @@ public class MancalaGame {
 	}
 	
 	/**
-	 * return 0 if A wins, 1 is B wins, 2 if tie
+	 * Counts up the number of stones Player A and B has. Winner is the one with the most stones. 
 	 * */
 	public void determineWinner() {
 
@@ -258,8 +307,8 @@ public class MancalaGame {
 	}
 
 	/**
-	 * 
-	 * */
+	 * If player's row is empty, then game is over. Time to call determineWinner method. 
+	 */
 	public boolean gameOverCheck() {
 
 		int countA = 0;
@@ -286,8 +335,8 @@ public class MancalaGame {
 	}
 
 	/**
-	 * @param pitNumber
-	 *            The name of the pit
+	 * Convert String of pit index to int
+	 * @param pitNumber The name of the pit
 	 * @return i The index of the pitNumber
 	 * */
 	public int convertToInt(String pitNumber) {
@@ -308,7 +357,7 @@ public class MancalaGame {
 	
 	/**
 	 * Console version of the game.
-	 * */
+	 */
 	public void playConsoleVersion() {
 
 		String text;
@@ -351,17 +400,19 @@ public class MancalaGame {
 
 	}
 
+	/**
+	 * Sets default state of Mancala game.
+	 */
 	private void playGUIVersion() {
 		stonesLeft = stonesPerPit * NUMBER_OF_PITS;
 		// Player A goes first
 		playerBTurn = false;
 		this.resetBoard();
-
 	}
 	
 	/**
 	 * Prints the mancala board onto the console.
-	 * */
+	 */
 	private void printBoard() {
 
 		if (playerBTurn) {
